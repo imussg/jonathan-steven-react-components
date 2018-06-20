@@ -15,16 +15,34 @@ export default class App extends React.Component {
     }
   }
 
-  addButton(e){
+  calcButton(e){
 
     const inputOne = Number(document.getElementById("inputOne").value);
     const inputTwo = Number(document.getElementById("inputTwo").value);
 
+    let answer = 0;
     if( inputOne !== '' && inputTwo !== '') {
+      // console.log(e.target.innerHTML);
+      switch(e.target.innerHTML) {
+        case "add":
+          answer = inputOne + inputTwo;
+          break;
+        case "subtract":
+          answer = inputOne - inputTwo;
+          break;
+        case "multiply":
+          answer = inputOne * inputTwo;
+          break;
+        case "divide":
+          answer = inputOne / inputTwo;
+          break;
+        default:
+          console.log("something went wrong");
+      }
       this.setState({
         inputOne,
         inputTwo,
-        answer: inputOne + inputTwo
+        answer
       });
     } else {
       return;
@@ -36,10 +54,10 @@ export default class App extends React.Component {
       <form onSubmit={(e)=> e.preventDefault()}>
         <h1 className='title'>J.S. Calculator</h1>
         <CalcInput iden="inputOne"/>
-        <CalcButton onClick={e =>this.addButton(e)}/>
-        <CalcButton />
-        <CalcButton />
-        <CalcButton />
+        <CalcButton iden="add" onClick={e =>this.calcButton(e)}/>
+        <CalcButton iden="subtract" onClick={e =>this.calcButton(e)}/>
+        <CalcButton iden="multiply" onClick={e =>this.calcButton(e)}/>
+        <CalcButton iden="divide" onClick={e =>this.calcButton(e)}/>
         <CalcInput iden="inputTwo"/>
         <CalcOutput answer={this.state.answer}/>
       </form>
