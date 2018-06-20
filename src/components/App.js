@@ -9,26 +9,39 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      inputOne:'',
-      inputTwo:''
+      inputOne: 0,
+      inputTwo: 0,
+      answer: 0
     }
   }
 
   addButton(e){
-    console.log('got here');
+
+    const inputOne = Number(document.getElementById("inputOne").value);
+    const inputTwo = Number(document.getElementById("inputTwo").value);
+
+    if( inputOne !== '' && inputTwo !== '') {
+      this.setState({
+        inputOne,
+        inputTwo,
+        answer: inputOne + inputTwo
+      });
+    } else {
+      return;
+    }
   }
 
   render() {
     return (
       <form onSubmit={(e)=> e.preventDefault()}>
         <h1 className='title'>J.S. Calculator</h1>
-        <CalcInput />
-        <CalcButton addButton={e =>this.addButton(e)}/>
+        <CalcInput iden="inputOne"/>
+        <CalcButton onClick={e =>this.addButton(e)}/>
         <CalcButton />
         <CalcButton />
         <CalcButton />
-        <CalcInput />
-        <CalcOutput />
+        <CalcInput iden="inputTwo"/>
+        <CalcOutput answer={this.state.answer}/>
       </form>
     );
   } 
