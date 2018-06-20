@@ -4,7 +4,7 @@ export default function CalcInput(props) {
 
   return (
     <section>
-      <lable>Input</lable>
+      <label>Input</label>
       <input type='text'></input>
     </section>
   );

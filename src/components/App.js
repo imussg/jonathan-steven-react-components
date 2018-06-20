@@ -4,18 +4,32 @@ import CalcButton from './button';
 import CalcOutput from './output';
 import CalcInput from './input';
 
-export default function App(props) {
+export default class App extends React.Component {
+  constructor(props){
+    super(props);
 
-  return (
-    <section>
-      <h1 class='title'>J.S. Calculator</h1>
-      <CalcInput />
-      <CalcButton />
-      <CalcButton />
-      <CalcButton />
-      <CalcButton />
-      <CalcInput />
-      <CalcOutput />
-    </section>
-  );
+    this.state = {
+      inputOne:'',
+      inputTwo:''
+    }
+  }
+
+  addButton(e){
+    console.log('got here');
+  }
+
+  render() {
+    return (
+      <form onSubmit={(e)=> e.preventDefault()}>
+        <h1 className='title'>J.S. Calculator</h1>
+        <CalcInput />
+        <CalcButton addButton={e =>this.addButton(e)}/>
+        <CalcButton />
+        <CalcButton />
+        <CalcButton />
+        <CalcInput />
+        <CalcOutput />
+      </form>
+    );
+  } 
 } 
