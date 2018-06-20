@@ -4,8 +4,8 @@ export default function CalcInput(props) {
 
   return (
     <section>
-      <label>Input</label>
-      <input type='text' id={props.iden}></input>
+      <label>{props.id}</label>
+      <input type='text' id={props.iden} onChange={e => props.getVal(e)}></input>
     </section>
   );
 } 

@@ -15,32 +15,52 @@ export default class App extends React.Component {
     }
   }
 
+  getFirstVal(e){
+    this.setState({
+      inputOne: Number(e.currentTarget.value)
+    })
+  }
+
+  getSecondVal(e){
+    this.setState({
+      inputTwo: Number(e.currentTarget.value)
+    })
+  }
+
   addButton(e){
+    this.setState({
+      answer: this.state.inputOne + this.state.inputTwo
+    }) 
+  }
 
-    const inputOne = Number(document.getElementById("inputOne").value);
-    const inputTwo = Number(document.getElementById("inputTwo").value);
+  subButton(e){
+    this.setState({
+      answer: this.state.inputOne - this.state.inputTwo
+    }) 
+  }
 
-    if( inputOne !== '' && inputTwo !== '') {
-      this.setState({
-        inputOne,
-        inputTwo,
-        answer: inputOne + inputTwo
-      });
-    } else {
-      return;
-    }
+  mulButton(e){
+    this.setState({
+      answer: this.state.inputOne * this.state.inputTwo
+    }) 
+  }
+
+  divButton(e){
+    this.setState({
+      answer: this.state.inputOne / this.state.inputTwo
+    }) 
   }
 
   render() {
     return (
       <form onSubmit={(e)=> e.preventDefault()}>
         <h1 className='title'>J.S. Calculator</h1>
-        <CalcInput iden="inputOne"/>
-        <CalcButton onClick={e =>this.addButton(e)}/>
-        <CalcButton />
-        <CalcButton />
-        <CalcButton />
-        <CalcInput iden="inputTwo"/>
+        <CalcInput id={'Input One'} getVal={e => this.getFirstVal(e)} />
+        <CalcInput id={'Input Two'} getVal={e => this.getSecondVal(e)} />
+        <CalcButton id={'+'} operation={e =>this.addButton(e)}/>
+        <CalcButton id={'-'} operation={e =>this.subButton(e)}/>
+        <CalcButton id={'*'} operation={e =>this.mulButton(e)}/>
+        <CalcButton id={'/'} operation={e =>this.divButton(e)}/>
         <CalcOutput answer={this.state.answer}/>
       </form>
     );
